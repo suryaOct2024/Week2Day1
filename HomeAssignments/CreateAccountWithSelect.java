@@ -1,7 +1,5 @@
 package week2.day1.HomeAssignments;
 
-import java.sql.Driver;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,14 +21,14 @@ public class CreateAccountWithSelect {
 		driver.findElement(By.linkText("Accounts")).click();
 		driver.findElement(By.linkText("Create Account")).click();
 		
-		driver.findElement(By.id("accountName")).sendKeys("TestAccount3000");
+		driver.findElement(By.id("accountName")).sendKeys("TestAccount4003");
 		driver.findElement(By.name("description")).sendKeys("Selenium Automation Tester.");
 		
-		//Select Industry by index
+		//Select "ComputerSoftware" as the industry.
 		
 		WebElement indWE = driver.findElement(By.name("industryEnumId"));
 		Select indDD = new Select(indWE);
-		indDD.selectByIndex(3);
+		indDD.selectByVisibleText("Computer Software");
 		
 		//Select "S-Corporation" as ownership using SelectByVisibleText. 
 		
@@ -38,7 +36,7 @@ public class CreateAccountWithSelect {
 		Select ownDD = new Select(ownWE);
 		ownDD.selectByVisibleText("S-Corporation");
 		
-		//Select "Employee" as the source using SelectByValue. 
+		//Select "Employee" as the source using SelectByValue.
 		
 		WebElement srcWE = driver.findElement(By.id("dataSourceId"));
 		Select srcDD = new Select(srcWE);
@@ -46,22 +44,27 @@ public class CreateAccountWithSelect {
 		
 		//Select "eCommerce Site Internal Campaign" as the marketing campaign using SelectByIndex. 
 		
-		WebElement mktcampWE = driver.findElement(By.id("marketingCampaignId"));
-		Select mktcampDD = new Select(mktcampWE);
-		mktcampDD.selectByIndex(6);
+		WebElement mktWE = driver.findElement(By.id("marketingCampaignId"));
+		Select mktDD = new Select(mktWE);
+		mktDD.selectByIndex(6);
 		
-		//Select "Texas" as the state/province using SelectByValue.
+		//Select "Texas" as the state/province using SelectByValue. 
 		
-		WebElement stateWE = driver.findElement(By.id("generalStateProvinceGeoId"));       
+		WebElement stateWE = driver.findElement(By.id("generalStateProvinceGeoId"));
 		Select stateDD = new Select(stateWE);
 		stateDD.selectByValue("TX");
 		
 		driver.findElement(By.className("smallSubmit")).click();
 		
-		//Verify Account name
-		//String AcctName = driver.findElement(By.xpath("//span[contains(text(),'TestAccount')]").toString();
+		//Verify that the account name is displayed correctly.
 		
-		//System.out.println("Account name:"+AcctName);
+		String AcctName = driver.findElement(By.xpath("//span[contains(text(),'TestAccount')]")).getText();
+		if(AcctName!=null)
+			System.out.println("Account Name:"+AcctName);
+		else
+			System.out.println("CHECK !!! Account Name is null");
+		
+		driver.close();	
 
 	}
 
